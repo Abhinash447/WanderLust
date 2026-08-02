@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const review = require("./review");
+// const review = require("./review");
 const Schema = mongoose.Schema;
+const Review = require("./review");
 
 const defaultLink = "https://www.namasteindiatrip.com/blog/wp-content/uploads/2024/12/Kashi-Vishwanath-Temple.jpg";
 
@@ -48,6 +49,12 @@ const listingSchema = new Schema({
             ref: "Review",
         }
     ]
+});
+
+listingSchema.post("findOneAndDelete", async(listing) => {
+    if(listing) {
+        await Review.deleteMany({_id: {$in: listing.reviews}});
+    }
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
