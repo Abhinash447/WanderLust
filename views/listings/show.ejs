@@ -85,4 +85,74 @@
 
     </div>
 
+    <!-- Review Section -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow rounded-4">
+                <div class="card-body p-4">
+
+                    <h3 class="fw-bold mb-4">
+                        Leave a Review
+                    </h3>
+
+                    <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
+
+                        <!-- Rating -->
+                        <div class="mb-4">
+                            <label for="rating" class="form-label fw-semibold">
+                                Rating
+                            </label>
+
+                            <input
+                                type="range"
+                                class="form-range"
+                                min="1"
+                                max="5"
+                                id="rating"
+                                name="review[rating]"
+                                value="3"
+                            >
+
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span>1 ⭐</span>
+                                <span>2 ⭐</span>
+                                <span>3 ⭐</span>
+                                <span>4 ⭐</span>
+                                <span>5 ⭐</span>
+                            </div>
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-4">
+                            <label for="comment" class="form-label fw-semibold">
+                                Your Review
+                            </label>
+
+                            <textarea
+                                class="form-control rounded-3"
+                                id="comment"
+                                name="review[comment]"
+                                rows="5"
+                                placeholder="Share your experience..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button
+                            type="submit"
+                            class="btn btn-dark rounded-pill px-5"
+                        >
+                            Submit Review
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

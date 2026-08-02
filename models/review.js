@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose;
+const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
     comment: {
@@ -12,8 +12,8 @@ const reviewSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now(),
-    }
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model("Review", reviewSchema);

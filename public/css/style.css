@@ -226,3 +226,28 @@ body {
 .error-page .btn:hover {
     transform: scale(1.05);
 }
+
+.show-img{
+    border-radius: 1rem 1rem 0 0;
+}
+
+.form-range::-webkit-slider-thumb{
+    background: #212529;
+}
+
+.form-range::-moz-range-thumb{
+    background: #212529;
+}
+
+.form-control:focus{
+    border-color: #212529;
+    box-shadow: 0 0 0 .2rem rgba(33,37,41,.15);
+}
+
+.card{
+    transition: .3s;
+}
+
+.card:hover{
+    transform: translateY(-3px);
+}
