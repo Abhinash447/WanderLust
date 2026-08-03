@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
+const flash = require("connect-flash");
 
 // Models
 const Listing = require("../models/listing");
@@ -29,16 +30,14 @@ router.post(
     validateReview,
     wrapAsync(async (req, res) => {
         const { id } = req.params;
-
         const listing = await Listing.findById(id);
-
         const newReview = new Review(req.body.review);
 
         listing.reviews.push(newReview);
-
         await newReview.save();
         await listing.save();
 
+        req.flash("success", "New Review Created")
         res.redirect(`/listings/${id}`);
     })
 );
@@ -55,7 +54,7 @@ router.delete(
         });
 
         await Review.findByIdAndDelete(reviewId);
-
+        req.flash("success", "Review Deleted")
         res.redirect(`/listings/${id}`);
     })
 );

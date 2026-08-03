@@ -1,0 +1,62 @@
+<% if (successMsg && successMsg.length) { %>
+<div class="flash-container">
+    <div class="alert alert-success alert-dismissible fade show flash-success" role="alert">
+
+        <i class="fa-solid fa-circle-check me-2"></i>
+
+        <strong>Success!</strong>
+
+        <span class="ms-1"><%= successMsg %></span>
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close">
+        </button>
+
+    </div>
+</div>
+
+<script>
+setTimeout(() => {
+    const alert = document.querySelector(".flash-success");
+    if (alert) {
+        bootstrap.Alert.getOrCreateInstance(alert).close();
+    }
+}, 3000);
+</script>
+<% } %>
+<% if (errorMsg && errorMsg.length) { %>
+
+<div class="flash-container">
+
+    <div class="alert alert-danger alert-dismissible fade show flash-error" role="alert">
+
+        <i class="fa-solid fa-circle-xmark me-2"></i>
+
+        <strong>Oops!</strong>
+
+        <span class="ms-1"><%= errorMsg %></span>
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close">
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+setTimeout(() => {
+    const alert = document.querySelector(".flash-error");
+    if (alert) {
+        bootstrap.Alert.getOrCreateInstance(alert).close();
+    }
+}, 3000);
+</script>
+
+<% } %>
