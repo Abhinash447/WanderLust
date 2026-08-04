@@ -508,3 +508,76 @@ body {
 .signup-card a:hover{
     text-decoration:underline;
 }
+
+
+/* ==========================
+   Login Page
+========================== */
+
+.signup-page{
+    min-height:85vh;
+}
+
+.signup-card{
+    width:100%;
+    max-width:500px;
+    border-radius:20px;
+    transition:.3s ease;
+}
+
+.signup-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 45px rgba(0,0,0,.15);
+}
+
+.signup-icon{
+    width:80px;
+    height:80px;
+    line-height:80px;
+    font-size:2rem;
+    color:#fff;
+    background:#fe424d;
+    border-radius:50%;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.signup-card .form-control{
+    border-radius:12px;
+    padding:.9rem 1rem;
+    transition:.25s;
+}
+
+.signup-card .form-control:focus{
+    border-color:#fe424d;
+    box-shadow:0 0 0 .2rem rgba(254,66,77,.15);
+}
+
+.login-btn{
+    background:#fe424d !important;
+    border:none !important;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#e63946 !important;
+    transform:translateY(-2px);
+}
+
+.signup-link,
+.forgot-link{
+    color:#fe424d;
+    font-weight:600;
+}
+
+.signup-link:hover,
+.forgot-link:hover{
+    color:#d62839;
+    text-decoration:underline !important;
+}
+
+.form-check-input:checked{
+    background-color:#fe424d;
+    border-color:#fe424d;
+}
