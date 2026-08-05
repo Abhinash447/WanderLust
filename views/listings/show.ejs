@@ -72,30 +72,27 @@
                     </div>
 
                     <!-- Buttons -->
-                    <div class="d-flex gap-3 mt-5">
+                        <div class="d-flex gap-3 mt-5">
+                            <!-- Edit -->
+                            <a 
+                                href="/listings/<%= listing._id %>/edit"
+                                class="btn btn-dark px-4 rounded-pill"
+                            >
+                                Edit
+                            </a>
 
-                        <!-- Edit -->
-                        <a 
-                            href="/listings/<%= listing._id %>/edit"
-                            class="btn btn-dark px-4 rounded-pill"
-                        >
-                            Edit
-                        </a>
+                            <!-- Delete -->
+                            <form 
+                                method="POST"
+                                action="/listings/<%= listing._id %>?_method=DELETE"
+                            >
 
-                        <!-- Delete -->
-                        <form 
-                            method="POST"
-                            action="/listings/<%= listing._id %>?_method=DELETE"
-                        >
+                                <button class="btn btn-outline-danger rounded-pill px-4">
+                                    Delete
+                                </button>
 
-                            <button class="btn btn-outline-danger rounded-pill px-4">
-                                Delete
-                            </button>
-
-                        </form>
-
-                    </div>
-
+                            </form>
+                        </div>
                 </div>
 
             </div>

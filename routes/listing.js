@@ -8,7 +8,7 @@ const Listing = require("../models/listing");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema");
-const { isLogin } = require("../middleware");
+const { isLogin, isOwner } = require("../middleware");
 
 // Validation Middleware
 const validateListing = (req, res, next) => {
@@ -53,7 +53,6 @@ router.get(
             req.flash("error", "Listing not found.");
             return res.redirect("/listings");
         }
-        console.log(listing);
         res.render("listings/show.ejs", { listing });
     })
 );
@@ -78,6 +77,7 @@ router.post(
 router.get(
     "/:id/edit",
     isLogin,
+    isOwner,
     wrapAsync(async (req, res) => {
         const { id } = req.params;
 
@@ -95,14 +95,15 @@ router.get(
 router.put(
     "/:id",
     isLogin,
+    isOwner,
     validateListing,
     wrapAsync(async (req, res) => {
         const { id } = req.params;
-
         await Listing.findByIdAndUpdate(id, {
             ...req.body.listing,
         });
-        req.flash("success", "Listing Updated");
+
+        req.flash("success", "Listing updated successfully.");
         res.redirect(`/listings/${id}`);
     })
 );
@@ -112,6 +113,7 @@ router.put(
 router.delete(
     "/:id",
     isLogin,
+    isOwner,
     wrapAsync(async (req, res) => {
         const { id } = req.params;
 
