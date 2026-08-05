@@ -1,16 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
-
     <div class="container">
 
         <!-- Logo -->
         <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="/listings">
-
             <i class="fa-solid fa-compass me-2"></i>
-
             <span class="brand-name">
                 WanderLust
             </span>
-
         </a>
 
         <!-- Mobile Toggle -->
@@ -23,66 +19,65 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
         >
-
             <span class="navbar-toggler-icon"></span>
-
         </button>
 
         <!-- Navbar Content -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
             <!-- Left Links -->
             <div class="navbar-nav me-auto ms-3">
-
                 <a class="nav-link nav-custom-link" href="/">
-
                     Home
-
                 </a>
-
                 <a class="nav-link nav-custom-link" href="/listings">
-
                     Explore
-
                 </a>
-
                 <a class="nav-link nav-custom-link" href="/listings/new">
-
                     Add Listing
-
                 </a>
-
             </div>
 
             <!-- Right Side -->
             <div class="navbar-nav ms-auto align-items-center">
-
                 <!-- Search Box -->
                 <form class="d-flex me-3">
-
                     <input 
                         class="form-control rounded-pill search-input"
                         type="search"
                         placeholder="Search destinations"
                     >
-
                 </form>
 
                 <!-- Auth Buttons -->
-                <a class="nav-link nav-custom-link" href="#">
+                <% if (!currUser) { %>
 
-                    Login
+                    <a class="nav-link nav-custom-link" href="/login">
+                        Login
+                    </a>
 
-                </a>
+                    <a
+                        class="btn btn-dark rounded-pill px-4 ms-2 signup-btn"
+                        href="/signup"
+                    >
+                        Sign Up
+                    </a>
 
-                <a 
-                    class="btn btn-dark rounded-pill px-4 ms-2 signup-btn"
-                    href="#"
+                <% } else { %>
+
+                <span class="navbar-text me-3 fw-semibold">
+                    <i class="fa-solid fa-user me-1"></i>
+                    <%= currUser.username %>
+                </span>
+
+                <a
+                    class="btn btn-outline-danger rounded-pill px-4"
+                    href="/logout"
                 >
-
-                    Sign Up
-
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                    Logout
                 </a>
+
+            <% } %>
 
             </div>
 

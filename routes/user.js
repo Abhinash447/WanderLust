@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const { saveRedirectUrl } = require("../middleware");
 
 router.get("/signup", (req, res) => {
     res.render("users/signup.ejs");
@@ -19,11 +20,14 @@ router.post(
                 email,
             });
 
-            await User.register(newUser, password);
-
-            req.flash("success", "Welcome to WanderLust! Your account has been created.");
-            res.redirect("/listings");
-
+            const registerdUser = await User.register(newUser, password);
+            req.login(registerdUser, (err) => {
+                if(err) {
+                    return next(err);
+                }
+                req.flash("success", "Welcome to WanderLust! Your account has been created.");
+                res.redirect("/listings");
+            });
         } catch (err) {
 
             if (err.name === "UserExistsError") {
@@ -43,14 +47,27 @@ router.get("/login", (req, res) => {
 
 router.post(
     "/login",
+    saveRedirectUrl,
     passport.authenticate("local", {
         failureRedirect: "/login",
         failureFlash: true,
     }),
     (req, res) => {
         req.flash("success", "Welcome back to WanderLust!");
-        res.redirect("/listings");
+
+        const redirectUrl = res.locals.redirectUrl || "/listings";
+        res.redirect(redirectUrl);
     }
 );
+
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if(err) {
+            return next(err);
+        }
+        req.flash("success", "You have been logged out successfully.");
+        res.redirect("/listings");
+    });
+});
 
 module.exports = router;

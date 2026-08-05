@@ -24,11 +24,30 @@
 
                 <!-- Body -->
                 <div class="card-body p-4">
-
                     <!-- Host -->
-                    <p class="text-muted mb-3">
+                    <p class="text-muted mb-2">
                         Hosted in <%= listing.location %>, <%= listing.country %>
                     </p>
+
+                    <div class="host-info mb-4">
+
+                        <div class="host-avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+
+                            <small class="text-muted d-block">
+                                Hosted by
+                            </small>
+
+                            <h6 class="mb-0 fw-semibold">
+                                <%= listing.owner.username %>
+                            </h6>
+
+                        </div>
+
+                    </div>
 
                     <!-- Description -->
                     <p class="card-text fs-5">
