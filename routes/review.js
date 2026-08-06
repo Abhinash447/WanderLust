@@ -5,36 +5,28 @@ const flash = require("connect-flash");
 // Models
 const Listing = require("../models/listing");
 const Review = require("../models/review");
-const { saveRedirectUrl } = require("../middleware");
-const { isLogin } = require("../middleware");
 
 // Utilities
 const wrapAsync = require("../utils/wrapAsync");
-const ExpressError = require("../utils/ExpressError");
-const { reviewSchema } = require("../schema");
-
-// Validation Middleware
-const validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-
-    if (error) {
-        const errMsg = error.details.map((el) => el.message).join(", ");
-        throw new ExpressError(400, errMsg);
-    }
-
-    next();
-};
+const { 
+    validateReview, 
+    isLogin,
+    saveRedirectUrl, 
+    isReviewAuthor 
+} = require("../middleware");
 
 // Create Review
 // POST /listings/:id/reviews
 router.post(
     "/",
+    isLogin,
     validateReview,
     wrapAsync(async (req, res) => {
         const { id } = req.params;
         const listing = await Listing.findById(id);
         const newReview = new Review(req.body.review);
-
+        newReview.author = req.user._id;
+        
         listing.reviews.push(newReview);
         await newReview.save();
         await listing.save();
@@ -48,6 +40,8 @@ router.post(
 // DELETE /listings/:id/reviews/:reviewId
 router.delete(
     "/:reviewId",
+    isLogin,
+    isReviewAuthor,
     wrapAsync(async (req, res) => {
         const { id, reviewId } = req.params;
 
