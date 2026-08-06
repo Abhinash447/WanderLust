@@ -15,9 +15,25 @@ module.exports.validateListing = (req, res, next) => {
     next();
 };
 
+// module.exports.isLogin = (req, res, next) => {
+//     if (!req.isAuthenticated()) {
+//         req.session.redirectUrl = req.originalUrl;
+//         req.flash("error", "Please log in to continue.");
+//         return res.redirect("/login");
+//     }
+
+//     next();
+// };
+
 module.exports.isLogin = (req, res, next) => {
     if (!req.isAuthenticated()) {
-        req.session.redirectUrl = req.originalUrl;
+
+        if (req.method === "GET") {
+            req.session.redirectUrl = req.originalUrl;
+        } else {
+            req.session.redirectUrl = `/listings/${req.params.id}`;
+        }
+
         req.flash("error", "Please log in to continue.");
         return res.redirect("/login");
     }
