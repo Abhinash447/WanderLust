@@ -1,3 +1,23 @@
+<style>
+    .search-btn {
+        background-color: #fe424d;
+        color: #fff;
+        border-radius: 25px;
+        padding: 0 1rem 0 1rem;
+    }
+    .search-btn:hover {
+        background-color: #fe424d;
+        color: #fff;
+    }
+    .search-btn i {
+        display: inline;
+        margin-right: 0.5rem;
+    }
+    .search-inp {
+        border-radius: 25px;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
     <div class="container">
 
@@ -26,27 +46,34 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <!-- Left Links -->
             <div class="navbar-nav me-auto ms-3">
-                <a class="nav-link nav-custom-link" href="/">
-                    Home
-                </a>
                 <a class="nav-link nav-custom-link" href="/listings">
                     Explore
                 </a>
-                <a class="nav-link nav-custom-link" href="/listings/new">
-                    Add Listing
-                </a>
+            </div>
+
+            <div class="navbar-nav">
+                <form class="d-flex search-inp" role="search">
+
+                    <input
+                        class="form-control"
+                        type="search"
+                        placeholder="Search destinations..."
+                        aria-label="Search"
+                    >
+
+                    <button class="btn search-btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Search</span>
+                    </button>
+
+                </form>
             </div>
 
             <!-- Right Side -->
             <div class="navbar-nav ms-auto align-items-center">
-                <!-- Search Box -->
-                <form class="d-flex me-3">
-                    <input 
-                        class="form-control rounded-pill search-input"
-                        type="search"
-                        placeholder="Search destinations"
-                    >
-                </form>
+                 <a class="nav-link nav-custom-link" href="/listings/new">
+                    Add Listing
+                </a>
 
                 <!-- Auth Buttons -->
                 <% if (!currUser) { %>

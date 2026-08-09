@@ -13,8 +13,13 @@
                     Create a New Listing
                 </h2>
 
-                <form method="POST" action="/listings" novalidate class="needs-validation">
-
+                <form
+                    action="/listings"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="needs-validation"
+                    novalidate
+                >
                     <!-- Title -->
                     <div class="mb-4">
 
@@ -53,20 +58,19 @@
                         </div>
                     </div>
 
-                    <!-- Image URL -->
                     <div class="mb-4">
-
-                        <label for="image" class="form-label fw-semibold">
-                            Image URL
+                        <label 
+                            for="image" 
+                            class="form-label 
+                            fw-semibold">
+                            Upload Listing Image
                         </label>
-
                         <input 
-                            type="text"
-                            name="listing[image][url]"
-                            placeholder="Paste image URL"
+                            type="file"
+                            name="listing[image]"
                             class="form-control"
                         >
-
+                        required
                     </div>
 
                     <!-- Price + Country -->

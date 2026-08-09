@@ -1,0 +1,171 @@
+#filters {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 1rem 0 1.2rem;
+    border-bottom: 1px solid #eeeeee;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /* Hide scrollbar */
+    scrollbar-width: none;
+}
+
+#filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    flex: 0 0 auto;
+    min-width: 75px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    cursor: pointer;
+
+    color: #717171;
+    opacity: 0.75;
+
+    position: relative;
+    transition: all 0.25s ease;
+
+}
+
+.filter i {
+    font-size: 1.25rem;
+    margin-bottom: 0.45rem;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+
+/* Text */
+
+.filter p {
+    margin: 0;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.filter:hover {
+    opacity: 1;
+    color: #222;
+    transform: translateY(-3px);
+}
+
+.filter:hover i {
+    transform: scale(1.15);
+}
+
+.filter.active {
+    opacity: 1;
+    color: #000;
+}
+
+.filter.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -1.2rem;
+
+    transform: translateX(-50%);
+
+    width: 40px;
+    height: 3px;
+
+    background: #000;
+    border-radius: 10px;
+}
+
+.filter.active i {
+    transform: scale(1.1);
+}
+
+.filter:active {
+    transform: scale(0.92);
+}
+
+.tax-toggle {
+    flex: 0 0 auto;
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0.65rem 1rem;
+
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+
+    background: #fff;
+
+    white-space: nowrap;
+
+    transition: all 0.25s ease;
+}
+
+.tax-toggle:hover {
+    border-color: #aaa;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.tax-toggle .form-check {
+    margin: 0;
+}
+
+.tax-toggle .form-check-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #444;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+
+    #filters {
+        gap: 1.5rem;
+    }
+
+    .filter {
+        min-width: 68px;
+    }
+
+    .tax-toggle {
+        display: none;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    #filters {
+        gap: 1.2rem;
+        padding: 0.8rem 0 1rem;
+    }
+
+    .filter {
+        min-width: 60px;
+    }
+
+    .filter i {
+        font-size: 1.1rem;
+    }
+
+    .filter p {
+        font-size: 0.68rem;
+    }
+}

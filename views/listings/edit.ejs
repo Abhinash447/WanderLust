@@ -14,6 +14,7 @@
                 method="POST" action="/listings/<%= listing._id %>?_method=PUT" 
                 novalidate
                 class="needs-validation"
+                enctype="multipart/form-data"
             >
 
                 <!-- Title -->
@@ -54,37 +55,26 @@
 
                 <!-- Current Image Preview -->
                 <div class="mb-3">
-
-                    <label class="form-label">
-                        Current Image
-                    </label>
-
-                    <br>
-
-                    <img 
-                        src="<%= listing.image.url %>" 
-                        alt="listing_image"
-                        class="img-fluid rounded mb-3"
-                        style="height: 250px; width: 100%; object-fit: cover;"
-                        required
-                    >
-
-                </div>
-
-                <!-- Image URL -->
-                <div class="mb-3">
                     <label for="image" class="form-label">
-                        Image URL
+                        Upload New Image
                     </label>
-
-                    <input 
-                        type="text" 
-                        name="listing[image][url]" 
-                        value="<%= listing.image.url %>"
+                    <!-- Current Image -->
+                    <div class="mb-3">
+                        <img 
+                            src="<%= listing.image.url %>" 
+                            alt="listing_image"
+                            class="img-fluid rounded"
+                            style="height: 250px; width: 100%; object-fit: cover;"
+                        >
+                    </div>
+                    <!-- Upload New Image -->
+                    <input
+                        type="file"
+                        id="image"
+                        name="listing[image]"
                         class="form-control"
-                        placeholder="Enter image URL"
+                        accept="image/png, image/jpeg, image/jpg"
                     >
-                    <div class="invalid-feedback">Please enter a valid imgage URL</div>
                 </div>
 
                 <!-- Price + Country -->
