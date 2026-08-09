@@ -68,10 +68,13 @@ const sessionOptions = {
     }
 }
 
-// // Home Route
-// app.get("/", (req, res) => {
-//     res.send("Hi, I am root!");
-// });
+console.log("DB URL exists:", !!process.env.ATLASDB_URL);
+console.log("SECRET exists:", !!process.env.SECRET);
+
+// Home Route
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 app.use(session(sessionOptions));
 app.use(flash());
