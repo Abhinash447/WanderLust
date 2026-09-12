@@ -65,10 +65,5 @@ htmlcov/
 # Test output
 test-results/
 
-# Package lock files (optional)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
-
 # Git
 *.orig

@@ -1,9 +1,48 @@
 const axios = require("axios");
 const Listing = require("../models/listing");
+const categorizeListing = require("../utils/categorizeListing");
 
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index", { allListings });
+    const { search, category } = req.query;
+
+    let filter = {};
+
+    // Search filter
+    if (search && search.trim() !== "") {
+        filter.$or = [
+            {
+                title: {
+                    $regex: search,
+                    $options: "i"
+                }
+            },
+            {
+                location: {
+                    $regex: search,
+                    $options: "i"
+                }
+            },
+            {
+                country: {
+                    $regex: search,
+                    $options: "i"
+                }
+            }
+        ];
+    }
+
+    // Category filter
+    if (category && category !== "trending") {
+        filter.category = category;
+    }
+
+    const allListings = await Listing.find(filter);
+
+    res.render("listings/index", {
+        allListings,
+        search: search || "",
+        category: category || "trending"
+    });
 };
 
 module.exports.renderNewForm = (req, res) => {
@@ -83,13 +122,23 @@ module.exports.createListing = async (req, res) => {
 
     const newListing = new Listing(req.body.listing);
 
+    // Owner
     newListing.owner = req.user._id;
 
+    // Automatically categorize listing
+    newListing.category = categorizeListing(
+        newListing.title,
+        newListing.description,
+        newListing.location
+    );
+
+    // Image
     newListing.image = {
         url: req.file.path,
         filename: req.file.filename
     };
 
+    // Location coordinates
     newListing.geometry = {
         type: "Point",
         coordinates: [Number(lon), Number(lat)]

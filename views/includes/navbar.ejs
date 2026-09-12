@@ -1,65 +1,270 @@
 <style>
-    .search-btn {
-        background-color: #fe424d;
-        color: #fff;
-        border-radius: 25px;
-        padding: 0 1rem 0 1rem;
+    .navbar {
+        min-height: 78px;
     }
-    .search-btn:hover {
-        background-color: #fe424d;
-        color: #fff;
+
+    .navbar-brand {
+        color: #fe424d !important;
+        white-space: nowrap;
     }
-    .search-btn i {
-        display: inline;
-        margin-right: 0.5rem;
+
+    .navbar-brand i {
+        color: #fe424d;
     }
+
+    .navbar-main {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    .explore-toggle {
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        white-space: nowrap;
+        border: none;
+        background: transparent;
+        padding: 0.6rem 0;
+    }
+
+    .explore-toggle:hover {
+        color: #fe424d;
+    }
+
+    .search-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
     .search-inp {
-        border-radius: 25px;
+        width: 100%;
+        max-width: 500px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .search-inp .form-control {
+        flex: 1;
+        height: 100%;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 1.2rem;
+        background: transparent;
+    }
+
+    .search-inp .form-control:focus {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .search-btn {
+        height: 100%;
+        border: none;
+        border-radius: 50px;
+        background: #fe424d;
+        color: #fff;
+        padding: 0 1.3rem;
+        white-space: nowrap;
+    }
+
+    .search-btn:hover {
+        background: #fe424d;
+        color: #fff;
+    }
+
+    .search-btn i {
+        margin-right: 0.4rem;
+    }
+
+    .account-toggle {
+        position: relative;
+    }
+
+    .account-toggle-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        padding: 0.55rem 0.8rem;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .account-toggle-btn:hover {
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .account-toggle-btn .user-icon {
+        color: #444;
+    }
+
+    .account-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 210px;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 16px;
+        padding: 0.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        display: none;
+        z-index: 1050;
+    }
+
+    .account-menu.show {
+        display: block;
+    }
+
+    .account-menu a {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        width: 100%;
+        padding: 0.75rem 0.9rem;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #222;
+        font-size: 0.95rem;
+        transition: 0.2s ease;
+    }
+
+    .account-menu a:hover {
+        background: #f7f7f7;
+        color: #fe424d;
+    }
+
+    .account-menu .logout {
+        color: #fe424d;
+    }
+
+    .account-menu .divider {
+        height: 1px;
+        background: #eee;
+        margin: 0.3rem 0;
+    }
+
+    .guest-links {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+    .guest-links a {
+        white-space: nowrap;
+    }
+
+    .login-link {
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .login-link:hover {
+        color: #fe424d;
+    }
+
+
+    @media (max-width: 991px) {
+
+        .navbar {
+            min-height: 70px;
+        }
+
+        .navbar-main {
+            gap: 0.5rem;
+        }
+
+        .explore-toggle {
+            display: none;
+        }
+
+        .search-wrapper {
+            display: none;
+        }
+
+        .account-toggle {
+            margin-left: auto;
+        }
+
+        .guest-links {
+            margin-left: auto;
+        }
+
+        .account-menu {
+            position: fixed;
+            top: 70px;
+            right: 15px;
+            width: 220px;
+        }
+    }
+
+
+    @media (max-width: 576px) {
+
+        .navbar-brand {
+            font-size: 1.5rem !important;
+        }
+
+        .navbar-main {
+            width: 100%;
+        }
+
+        .account-toggle-btn {
+            padding: 0.55rem 0.7rem;
+        }
+
+        .account-toggle-btn .username {
+            display: none;
+        }
+
+        .account-menu {
+            right: 10px;
+            width: calc(100vw - 20px);
+            max-width: 300px;
+        }
     }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
+
+<nav class="navbar navbar-light bg-white border-bottom sticky-top shadow-sm">
+
     <div class="container">
 
-        <!-- Logo -->
-        <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="/listings">
-            <i class="fa-solid fa-compass me-2"></i>
-            <span class="brand-name">
-                WanderLust
-            </span>
-        </a>
+        <div class="navbar-main">
 
-        <!-- Mobile Toggle -->
-        <button 
-            class="navbar-toggler border-0 shadow-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="/listings">
+                <i class="fa-solid fa-compass me-2"></i>
+                <span>WanderLust</span>
+            </a>
 
-        <!-- Navbar Content -->
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <!-- Left Links -->
-            <div class="navbar-nav me-auto ms-3">
-                <a class="nav-link nav-custom-link" href="/listings">
-                    Explore
-                </a>
-            </div>
 
-            <div class="navbar-nav">
-                <form class="d-flex search-inp" role="search">
+            <button type="button" class="explore-toggle">
+                Explore
+                <i class="fa-solid fa-chevron-down ms-1"></i>
+            </button>
 
-                    <input
-                        class="form-control"
-                        type="search"
-                        placeholder="Search destinations..."
-                        aria-label="Search"
-                    >
+
+            <div class="search-wrapper">
+
+                <form class="d-flex search-inp" action="/listings" method="GET" role="search">
+
+                    <input class="form-control" type="search" name="search" placeholder="Search destinations..."
+                        aria-label="Search" value="<%= typeof search !== 'undefined' ? search : '' %>">
 
                     <button class="btn search-btn" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -67,49 +272,118 @@
                     </button>
 
                 </form>
+
             </div>
 
-            <!-- Right Side -->
-            <div class="navbar-nav ms-auto align-items-center">
-                 <a class="nav-link nav-custom-link" href="/listings/new">
-                    Add Listing
-                </a>
 
-                <!-- Auth Buttons -->
-                <% if (!currUser) { %>
+            <% if (!currUser) { %>
 
-                    <a class="nav-link nav-custom-link" href="/login">
+                <div class="guest-links">
+
+                    <a href="/login" class="login-link">
                         Login
                     </a>
 
-                    <a
-                        class="btn btn-dark rounded-pill px-4 ms-2 signup-btn"
-                        href="/signup"
-                    >
+                    <a href="/signup" class="btn btn-dark rounded-pill px-4">
                         Sign Up
                     </a>
 
+                </div>
+
                 <% } else { %>
 
-                <span class="navbar-text me-3 fw-semibold">
-                    <i class="fa-solid fa-user me-1"></i>
-                    <%= currUser.username %>
-                </span>
+                    <div class="account-toggle">
 
-                <a
-                    class="btn btn-outline-danger rounded-pill px-4"
-                    href="/logout"
-                >
-                    <i class="fa-solid fa-right-from-bracket me-2"></i>
-                    Logout
-                </a>
+                        <button type="button" class="account-toggle-btn" id="accountToggle" aria-expanded="false">
 
-            <% } %>
+                            <i class="fa-solid fa-bars"></i>
 
-            </div>
+                            <i class="fa-solid fa-user user-icon"></i>
+
+                            <span class="username">
+                                <%= currUser.username %>
+                            </span>
+
+                        </button>
+
+
+                        <div class="account-menu" id="accountMenu">
+
+                            <a href="/listings/new">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                <span>
+                                    Add Listing
+                                </span>
+
+                            </a>
+
+
+                            <a href="#">
+
+                                <i class="fa-solid fa-user"></i>
+
+                                <span>
+                                    <%= currUser.username %>
+                                </span>
+
+                            </a>
+
+
+                            <div class="divider"></div>
+
+
+                            <a href="/logout" class="logout">
+
+                                <i class="fa-solid fa-right-from-bracket"></i>
+
+                                <span>
+                                    Sign Out
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <% } %>
 
         </div>
 
     </div>
 
 </nav>
+
+
+<script>
+    const accountToggle = document.getElementById("accountToggle");
+    const accountMenu = document.getElementById("accountMenu");
+
+    if (accountToggle && accountMenu) {
+        accountToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            const isOpen = accountMenu.classList.toggle("show");
+
+            accountToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+        });
+
+        document.addEventListener("click", () => {
+            accountMenu.classList.remove("show");
+
+            accountToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+        });
+
+        accountMenu.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+    }
+</script>

@@ -1,5 +1,5 @@
 {
-  "engine":{
+  "engine": {
     "node": "24.14.1"
   },
   "name": "wanderlust",
@@ -7,7 +7,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -31,5 +32,8 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^9.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
